@@ -22,7 +22,7 @@ const BookCard: FC<BookCardProps> = ({ author, bookTitle, btnFaceName }) => {
                         {/* Robert C. Martin */ author}
                     </CardContent>
                 </div>
-                <CardContent>
+                <CardContent className="pt-6">
                     <Button className="bg-[#4a90e2]">
                         {/* Start Reading */ btnFaceName}
                     </Button>
