@@ -6,8 +6,14 @@ export default function EditBook() {
     return (
         <div className="flex justify-center mt-6">
             <Card className="w-[350px] rounded-sm border-current">
-                <CardHeader className="bg-[#4a4a4a]">
-                    <CardTitle className="flex text-white justify-center">
+                <CardHeader className="bg-[#4a4a4a] grid grid-cols-7">
+                    <Button
+                        variant="secondary"
+                        className="col-start-1 col-end-2 h-5 mt-[6px]"
+                    >
+                        Back
+                    </Button>
+                    <CardTitle className="flex text-white justify-center col-start-3 col-span-3 items-center">
                         Edit Book Details
                     </CardTitle>
                 </CardHeader>
