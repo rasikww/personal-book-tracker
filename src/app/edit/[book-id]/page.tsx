@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -8,6 +9,7 @@ export default function EditBook() {
             <Card className="w-[350px] rounded-sm border-current">
                 <CardHeader className="bg-[#4a4a4a] grid grid-cols-7">
                     <Button
+                        onClick={() => window.history.back()}
                         variant="secondary"
                         className="col-start-1 col-end-2 h-5 mt-[6px]"
                     >
