@@ -15,7 +15,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
     title: "Personal Book Tracker",
-    description: "Sample project to learn NextJS, Tailwind and Shadcn/ui",
+    description:
+        "Sample project to learn NextJS, Tailwind, Axios and Shadcn/ui",
 };
 
 export default function RootLayout({
