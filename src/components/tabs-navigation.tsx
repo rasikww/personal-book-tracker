@@ -7,10 +7,10 @@ export function TabsNavigation() {
     const router = useRouter();
     const pathname = usePathname();
 
-    const currentTab = pathname === "/add-book" ? "add-books" : "my-books";
+    const currentTab = pathname === "/add-books" ? "add-books" : "my-books";
 
     return (
-        <Tabs value={currentTab} className="w-full mb-8">
+        <Tabs value={currentTab} className="w-48 mb-8 mt-8">
             <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger
                     value="my-books"

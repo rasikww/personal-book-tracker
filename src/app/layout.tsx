@@ -29,7 +29,10 @@ export default function RootLayout({
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
                 <main className="container mx-auto p-4">
-                    <TabsNavigation />
+                    <div className="w-full flex justify-center bg-blue-500 rounded-md mb-8">
+                        <TabsNavigation />
+                    </div>
+
                     {children}
                 </main>
             </body>
