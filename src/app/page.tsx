@@ -1,25 +1,37 @@
+"use client";
 import { BookCard } from "@/components/ui/book-card";
+import { Book } from "@/db";
+import { use, useEffect, useState } from "react";
+import { BookData, BookStatus } from "./add-books/page";
+import axios from "axios";
 
-async function getBooks() {
-    // Fetch books from your API
-    return [
-        {
-            id: "1",
-            title: "Book 1",
-            author: "Author 1",
-            description: "Description 1",
-        },
-        {
-            id: "2",
-            title: "Book 2",
-            author: "Author 2",
-            description: "Description 2",
-        },
-    ];
-}
+export default function Home() {
+    const [books, setBooks] = useState<Book[]>([]);
+    const [EditBook, setEditBook] = useState<BookData | null>(null);
+    const [FormData, setFormData] = useState<BookData>({
+        title: "",
+        author: "",
+        description: "",
+        isbn: "",
+        publishedYear: "",
+        totalPages: 0,
+        bookmarkedPage: 0,
+        status: BookStatus.TO_READ,
+    });
 
-export default async function Home() {
-    const books = await getBooks();
+    const fetchBooks = async () => {
+        try {
+            const response = await axios.get("/api/books");
+            setBooks(response.data);
+        } catch (error) {
+            console.error("Failed to fetch books", error);
+        }
+    };
+
+    useEffect(() => {
+        fetchBooks();
+    }, []);
+
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {books.map((book) => (

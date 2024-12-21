@@ -1,5 +1,3 @@
-"use client";
-
 import {
     Card,
     CardContent,
@@ -15,13 +13,8 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-
-type Book = {
-    id: string;
-    title: string;
-    author: string;
-    description: string;
-};
+import { Book } from "@/db";
+import axios from "axios";
 
 export function BookCard({ book }: { book: Book }) {
     return (
@@ -29,6 +22,7 @@ export function BookCard({ book }: { book: Book }) {
             <CardHeader>
                 <CardTitle>{book.title}</CardTitle>
                 <CardDescription>{book.author}</CardDescription>
+                <CardDescription>{book.status}</CardDescription>
             </CardHeader>
             <CardContent className="flex justify-between items-center">
                 <Dialog>
@@ -44,14 +38,16 @@ export function BookCard({ book }: { book: Book }) {
                 </Dialog>
                 <Button
                     variant="destructive"
-                    onClick={() => {
+                    onClick={async () => {
                         if (
                             confirm(
                                 "Are you sure you want to delete this book?"
                             )
                         ) {
-                            // Handle delete
-                            console.log("Deleting book:", book.id);
+                            const response = await axios.delete(
+                                `/api/books/${book.id}`
+                            );
+                            window.location.reload();
                         }
                     }}
                 >
