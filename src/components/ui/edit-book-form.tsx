@@ -116,6 +116,23 @@ export function EditBookForm({ book }: { book: Book }) {
             </div>
 
             <div className="flex justify-end gap-4">
+                <Button
+                    variant="destructive"
+                    onClick={async () => {
+                        if (
+                            confirm(
+                                "Are you sure you want to delete this book?"
+                            )
+                        ) {
+                            const response = await axios.delete(
+                                `/api/books/${book.id}`
+                            );
+                            window.location.reload();
+                        }
+                    }}
+                >
+                    Delete
+                </Button>
                 <DialogClose asChild>
                     <Button type="button" variant="outline">
                         Cancel

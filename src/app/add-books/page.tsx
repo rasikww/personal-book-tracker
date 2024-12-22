@@ -176,13 +176,18 @@ export default function AddBooks() {
 
                     <div className="flex justify-end gap-4">
                         <Button
+                            className="hover:bg-[#4a90e2] hover:text-white"
                             type="button"
                             variant="outline"
                             onClick={() => router.push("/")}
                         >
                             Cancel
                         </Button>
-                        <Button type="submit" disabled={isLoading}>
+                        <Button
+                            className="bg-[#4a90e2] text-white hover:bg-blue-500"
+                            type="submit"
+                            disabled={isLoading}
+                        >
                             {isLoading ? "Adding..." : "Add Book"}
                         </Button>
                     </div>

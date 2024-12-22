@@ -15,12 +15,11 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { Book } from "@/db";
-import axios from "axios";
 import { EditBookForm } from "./edit-book-form";
 
 export function BookCard({ book }: { book: Book }) {
     return (
-        <Card className="h-full">
+        <Card className="h-full hover:bg-slate-200">
             <CardHeader>
                 <CardTitle>{book.title}</CardTitle>
                 <CardDescription>{book.author}</CardDescription>
@@ -29,7 +28,12 @@ export function BookCard({ book }: { book: Book }) {
             <CardContent className="flex justify-between items-center">
                 <Dialog>
                     <DialogTrigger asChild>
-                        <Button variant="outline">Edit</Button>
+                        <Button
+                            variant="outline"
+                            className="hover:bg-[#4a90e2] hover:text-white"
+                        >
+                            Edit
+                        </Button>
                     </DialogTrigger>
                     <DialogContent>
                         <DialogHeader>
@@ -41,7 +45,7 @@ export function BookCard({ book }: { book: Book }) {
                         <EditBookForm book={book} />
                     </DialogContent>
                 </Dialog>
-                <Button
+                {/* <Button
                     variant="destructive"
                     onClick={async () => {
                         if (
@@ -57,7 +61,7 @@ export function BookCard({ book }: { book: Book }) {
                     }}
                 >
                     Delete
-                </Button>
+                </Button> */}
             </CardContent>
         </Card>
     );
