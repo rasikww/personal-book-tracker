@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from "next/navigation";
 import { DialogClose } from "@/components/ui/dialog";
 import axios from "axios";
@@ -15,12 +14,14 @@ import { DropdownMenuRadioGroupBookStatus } from "./dropdown-radio-book-status";
 export function EditBookForm({ book }: { book: Book }) {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
+    const [status, setStatus] = useState(book.status);
     const [formData, setFormData] = useState({
         id: book.id,
         title: book.title,
         author: book.author,
-        bookmarkedPage: book.bookmarkedPage,
+        bookmarkedPage: book.bookmarked_page,
         status: book.status,
+        totalPages: book.total_pages,
     });
 
     const handleChange = (
@@ -38,27 +39,26 @@ export function EditBookForm({ book }: { book: Book }) {
         setIsLoading(true);
 
         try {
-            // const response = await fetch(`/api/books/${id}`, {
-            //     method: "PUT",
-            //     headers: {
-            //         "Content-Type": "application/json",
-            //     },
-            //     body: JSON.stringify(formData),
-            // });
+            const updatedBook = {
+                id: book.id,
+                title: formData.title,
+                author: formData.author,
+                bookmarked_page: formData.bookmarkedPage,
+                status: status,
+                total_pages: formData.totalPages,
+            };
 
-            // if (!response.ok) {
-            //     throw new Error("Failed to update book");
-            // }
-
-            const response = await axios.put(`/api/books/${book.id}`, formData);
+            const response = await axios.put(
+                `/api/books/${book.id}`,
+                updatedBook
+            );
             if (response.status !== 200) {
                 throw new Error("Failed to update book");
             }
 
             // Refresh the page data
-            router.refresh();
+            window.location.reload();
         } catch (error) {
-            console.error("Error updating book:", error);
             alert("Failed to update book");
         } finally {
             setIsLoading(false);
@@ -91,25 +91,28 @@ export function EditBookForm({ book }: { book: Book }) {
                 />
             </div>
 
-            {/* <div className="space-y-2">
-                <Label htmlFor="description">Description</Label>
-                <Textarea
-                    id="description"
-                    name="description"
-                    value={formData.description}
-                    onChange={handleChange}
-                    placeholder="Book description"
-                    className="min-h-[100px]"
-                />
-            </div> */}
-
             <div className="space-y-2">
-                <DropdownMenuRadioGroupBookStatus bookStatus={book.status} />
+                <DropdownMenuRadioGroupBookStatus
+                    setStatus={setStatus}
+                    status={status}
+                />
             </div>
 
             <div className="space-y-2">
-                <Label htmlFor="bookmarkedPage">Current Bookmarked Page</Label>
-                <Input id="bookmarkedPage"></Input>
+                <Label htmlFor="bookmarkedPage">
+                    Current Bookmarked Page (Total: {book.total_pages} pages)
+                </Label>
+
+                <Input
+                    id="bookmarkedPage"
+                    name="bookmarkedPage"
+                    type="number"
+                    min="1"
+                    max={book.total_pages}
+                    value={formData.bookmarkedPage}
+                    onChange={handleChange}
+                    placeholder="Current Bookmarked Page"
+                ></Input>
             </div>
 
             <div className="flex justify-end gap-4">

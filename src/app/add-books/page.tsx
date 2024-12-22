@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
+import axios from "axios";
 
 export interface BookData {
     title: string;
@@ -55,19 +56,11 @@ export default function AddBooks() {
         setIsLoading(true);
 
         try {
-            const response = await fetch("/api/books", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formData),
-            });
-
-            if (!response.ok) {
+            const response = await axios.post("/api/books", formData);
+            toast.success("Book added successfully!");
+            if (response.status !== 200) {
                 throw new Error("Failed to add book");
             }
-
-            toast.success("Book added successfully!");
 
             // Reset form
             setFormData({
@@ -124,6 +117,19 @@ export default function AddBooks() {
                             className="w-full"
                         />
                     </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="totalPages">Total Pages *</Label>
+                        <Input
+                            id="totalPages"
+                            name="totalPages"
+                            type="number"
+                            value={formData.totalPages}
+                            onChange={handleChange}
+                            placeholder="Enter Total Pages"
+                            required
+                            className="w-full"
+                        />
+                    </div>
 
                     <div className="grid grid-cols-2 gap-4">
                         <div className="space-y-2">
@@ -149,7 +155,7 @@ export default function AddBooks() {
                                 onChange={handleChange}
                                 placeholder="Enter year"
                                 type="number"
-                                min="1800"
+                                min="1000"
                                 max={new Date().getFullYear()}
                                 className="w-full"
                             />

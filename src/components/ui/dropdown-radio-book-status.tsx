@@ -15,11 +15,13 @@ import {
 import { BookStatus } from "@/app/add-books/page";
 
 export function DropdownMenuRadioGroupBookStatus({
-    bookStatus,
+    setStatus,
+    status,
 }: {
-    bookStatus: BookStatus;
+    status: BookStatus;
+    setStatus: React.Dispatch<React.SetStateAction<BookStatus>>;
 }) {
-    const [status, setStatus] = React.useState(bookStatus);
+    // const [status, setStatus] = React.useState(bookStatus);
 
     return (
         <DropdownMenu>
