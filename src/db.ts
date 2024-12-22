@@ -16,5 +16,6 @@ export interface Book {
     id: number;
     title: string;
     author: string;
+    bookmarkedPage: number;
     status: BookStatus;
 }

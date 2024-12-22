@@ -9,12 +9,14 @@ import { Button } from "@/components/ui/button";
 import {
     Dialog,
     DialogContent,
+    DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { Book } from "@/db";
 import axios from "axios";
+import { EditBookForm } from "./edit-book-form";
 
 export function BookCard({ book }: { book: Book }) {
     return (
@@ -31,9 +33,12 @@ export function BookCard({ book }: { book: Book }) {
                     </DialogTrigger>
                     <DialogContent>
                         <DialogHeader>
-                            <DialogTitle>Edit Book</DialogTitle>
+                            <DialogTitle>Edit Book Details</DialogTitle>
+                            <DialogDescription>
+                                Make changes to "{book.title}" book details.
+                            </DialogDescription>
                         </DialogHeader>
-                        {/* <EditBookForm book={book} /> */}
+                        <EditBookForm book={book} />
                     </DialogContent>
                 </Dialog>
                 <Button

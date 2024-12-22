@@ -7,25 +7,20 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from "next/navigation";
 import { DialogClose } from "@/components/ui/dialog";
+import axios from "axios";
+import { Book } from "@/db";
+import React from "react";
+import { DropdownMenuRadioGroupBookStatus } from "./dropdown-radio-book-status";
 
-interface Book {
-    id: string;
-    title: string;
-    author: string;
-    description: string;
-}
-
-interface EditBookFormProps {
-    book: Book;
-}
-
-export function EditBookForm({ book }: EditBookFormProps) {
+export function EditBookForm({ book }: { book: Book }) {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const [formData, setFormData] = useState({
+        id: book.id,
         title: book.title,
         author: book.author,
-        description: book.description,
+        bookmarkedPage: book.bookmarkedPage,
+        status: book.status,
     });
 
     const handleChange = (
@@ -43,15 +38,20 @@ export function EditBookForm({ book }: EditBookFormProps) {
         setIsLoading(true);
 
         try {
-            const response = await fetch(`/api/books/${book.id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formData),
-            });
+            // const response = await fetch(`/api/books/${id}`, {
+            //     method: "PUT",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            //     body: JSON.stringify(formData),
+            // });
 
-            if (!response.ok) {
+            // if (!response.ok) {
+            //     throw new Error("Failed to update book");
+            // }
+
+            const response = await axios.put(`/api/books/${book.id}`, formData);
+            if (response.status !== 200) {
                 throw new Error("Failed to update book");
             }
 
@@ -91,7 +91,7 @@ export function EditBookForm({ book }: EditBookFormProps) {
                 />
             </div>
 
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
                 <Label htmlFor="description">Description</Label>
                 <Textarea
                     id="description"
@@ -101,6 +101,15 @@ export function EditBookForm({ book }: EditBookFormProps) {
                     placeholder="Book description"
                     className="min-h-[100px]"
                 />
+            </div> */}
+
+            <div className="space-y-2">
+                <DropdownMenuRadioGroupBookStatus bookStatus={book.status} />
+            </div>
+
+            <div className="space-y-2">
+                <Label htmlFor="bookmarkedPage">Current Bookmarked Page</Label>
+                <Input id="bookmarkedPage"></Input>
             </div>
 
             <div className="flex justify-end gap-4">

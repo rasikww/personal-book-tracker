@@ -31,7 +31,14 @@ export default function RootLayout({
             >
                 <main className="container mx-auto p-4">
                     <div className="w-full flex justify-center bg-blue-500 rounded-md mb-8">
-                        <TabsNavigation />
+                        <div className="flex justify-center flex-col">
+                            <h1 className="text-white text-center font-semibold text-lg pt-5 md:text-xl lg:text-2xl xl:text-3xl">
+                                Personal Book Tracker
+                            </h1>
+                            <div className="flex justify-center">
+                                <TabsNavigation />
+                            </div>
+                        </div>
                     </div>
 
                     {children}

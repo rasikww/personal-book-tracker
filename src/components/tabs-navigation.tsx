@@ -10,7 +10,7 @@ export function TabsNavigation() {
     const currentTab = pathname === "/add-books" ? "add-books" : "my-books";
 
     return (
-        <Tabs value={currentTab} className="w-48 mb-8 mt-8">
+        <Tabs value={currentTab} className="w-48 mb-4 mt-4">
             <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger
                     value="my-books"
