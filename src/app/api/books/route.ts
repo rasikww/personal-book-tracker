@@ -1,5 +1,4 @@
-import pool, { Book } from "@/db";
-import exp from "constants";
+import pool from "@/db";
 import { NextResponse } from "next/server";
 
 export async function GET() {

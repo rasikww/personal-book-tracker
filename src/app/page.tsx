@@ -1,23 +1,11 @@
 "use client";
 import { BookCard } from "@/components/ui/book-card";
 import { Book } from "@/db";
-import { use, useEffect, useState } from "react";
-import { BookData, BookStatus } from "./add-books/page";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Home() {
     const [books, setBooks] = useState<Book[]>([]);
-    const [EditBook, setEditBook] = useState<BookData | null>(null);
-    const [FormData, setFormData] = useState<BookData>({
-        title: "",
-        author: "",
-        description: "",
-        isbn: "",
-        publishedYear: "",
-        totalPages: 0,
-        bookmarkedPage: 0,
-        status: BookStatus.TO_READ,
-    });
 
     const fetchBooks = async () => {
         try {

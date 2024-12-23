@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useRouter } from "next/navigation";
 import { DialogClose } from "@/components/ui/dialog";
 import axios from "axios";
 import { Book } from "@/db";
@@ -12,7 +11,6 @@ import React from "react";
 import { DropdownMenuRadioGroupBookStatus } from "./dropdown-radio-book-status";
 
 export function EditBookForm({ book }: { book: Book }) {
-    const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
     const [status, setStatus] = useState(book.status);
     const [formData, setFormData] = useState({
