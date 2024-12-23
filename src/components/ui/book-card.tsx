@@ -45,23 +45,6 @@ export function BookCard({ book }: { book: Book }) {
                         <EditBookForm book={book} />
                     </DialogContent>
                 </Dialog>
-                {/* <Button
-                    variant="destructive"
-                    onClick={async () => {
-                        if (
-                            confirm(
-                                "Are you sure you want to delete this book?"
-                            )
-                        ) {
-                            const response = await axios.delete(
-                                `/api/books/${book.id}`
-                            );
-                            window.location.reload();
-                        }
-                    }}
-                >
-                    Delete
-                </Button> */}
             </CardContent>
         </Card>
     );

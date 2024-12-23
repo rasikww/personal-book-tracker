@@ -9,6 +9,7 @@ import axios from "axios";
 import { Book } from "@/db";
 import React from "react";
 import { DropdownMenuRadioGroupBookStatus } from "./dropdown-radio-book-status";
+import { BookStatus } from "@/app/add-books/page";
 
 export function EditBookForm({ book }: { book: Book }) {
     const [isLoading, setIsLoading] = useState(false);
@@ -105,11 +106,13 @@ export function EditBookForm({ book }: { book: Book }) {
                     id="bookmarkedPage"
                     name="bookmarkedPage"
                     type="number"
+                    defaultValue={book.bookmarked_page}
                     min="1"
                     max={book.total_pages}
-                    value={formData.bookmarkedPage}
+                    // value={formData.bookmarkedPage}
                     onChange={handleChange}
                     placeholder="Current Bookmarked Page"
+                    disabled={status !== BookStatus.READING}
                 ></Input>
             </div>
 
