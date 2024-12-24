@@ -14,8 +14,8 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { Book } from "@/db";
 import { EditBookForm } from "./edit-book-form";
+import { Book } from "@/types/books";
 
 export function BookCard({ book }: { book: Book }) {
     return (
@@ -39,7 +39,8 @@ export function BookCard({ book }: { book: Book }) {
                         <DialogHeader>
                             <DialogTitle>Edit Book Details</DialogTitle>
                             <DialogDescription>
-                                Make changes to "{book.title}" book details.
+                                Make changes to &quot;{book.title}&quot; book
+                                details.
                             </DialogDescription>
                         </DialogHeader>
                         <EditBookForm book={book} />

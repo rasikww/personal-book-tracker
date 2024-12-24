@@ -1,6 +1,7 @@
-require("dotenv").config();
+import { config } from "dotenv";
 import { Pool } from "pg";
-import { BookStatus } from "./app/add-books/page";
+
+config();
 
 const pool = new Pool({
     user: process.env.DB_USER,
@@ -11,12 +12,3 @@ const pool = new Pool({
 });
 
 export default pool;
-
-export interface Book {
-    id: number;
-    title: string;
-    author: string;
-    bookmarked_page: number;
-    status: BookStatus;
-    total_pages: number;
-}

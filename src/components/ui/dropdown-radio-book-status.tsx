@@ -12,7 +12,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { BookStatus } from "@/app/add-books/page";
+import { BookStatus } from "@/types/books";
 
 export function DropdownMenuRadioGroupBookStatus({
     setStatus,

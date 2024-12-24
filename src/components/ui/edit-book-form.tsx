@@ -6,10 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { DialogClose } from "@/components/ui/dialog";
 import axios from "axios";
-import { Book } from "@/db";
 import React from "react";
 import { DropdownMenuRadioGroupBookStatus } from "./dropdown-radio-book-status";
-import { BookStatus } from "@/app/add-books/page";
+import { Book, BookStatus } from "@/types/books";
 
 export function EditBookForm({ book }: { book: Book }) {
     const [isLoading, setIsLoading] = useState(false);
@@ -58,7 +57,9 @@ export function EditBookForm({ book }: { book: Book }) {
             // Refresh the page data
             window.location.reload();
         } catch (error) {
-            alert("Failed to update book");
+            if (error instanceof Error) {
+                alert(`Failed to update book, ${error.message}`);
+            }
         } finally {
             setIsLoading(false);
         }
@@ -125,9 +126,7 @@ export function EditBookForm({ book }: { book: Book }) {
                                 "Are you sure you want to delete this book?"
                             )
                         ) {
-                            const response = await axios.delete(
-                                `/api/books/${book.id}`
-                            );
+                            await axios.delete(`/api/books/${book.id}`);
                             window.location.reload();
                         }
                     }}

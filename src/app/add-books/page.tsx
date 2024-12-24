@@ -9,23 +9,7 @@ import { useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "sonner";
 import axios from "axios";
-
-export interface BookData {
-    title: string;
-    author: string;
-    description: string;
-    isbn: string;
-    publishedYear: string;
-    totalPages: number;
-    bookmarkedPage: number;
-    status: BookStatus;
-}
-
-export enum BookStatus {
-    READING = "Reading",
-    COMPLETED = "Completed",
-    TO_READ = "To Read",
-}
+import { BookData, BookStatus } from "@/types/books";
 
 export default function AddBooks() {
     const router = useRouter();

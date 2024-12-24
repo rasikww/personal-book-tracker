@@ -1,8 +1,8 @@
 "use client";
 import { BookCard } from "@/components/ui/book-card";
-import { Book } from "@/db";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Book } from "@/types/books";
 
 export default function Home() {
     const [books, setBooks] = useState<Book[]>([]);

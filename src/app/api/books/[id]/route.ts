@@ -1,4 +1,5 @@
-import pool, { Book } from "@/db";
+import pool from "@/db";
+import { Book } from "@/types/books";
 import { NextResponse } from "next/server";
 
 export async function DELETE(req: Request) {
@@ -22,8 +23,8 @@ export async function DELETE(req: Request) {
 }
 
 export async function PUT(req: Request) {
-    const url = req.url;
-    const id = url.split("/").pop();
+    // const url = req.url;
+    // const id = url.split("/").pop();
 
     const body = await req.json();
     try {
