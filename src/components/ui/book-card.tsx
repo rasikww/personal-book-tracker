@@ -20,33 +20,30 @@ import { Book } from "@/types/books";
 export function BookCard({ book }: { book: Book }) {
     return (
         <Card className="h-full hover:bg-slate-200">
-            <CardHeader>
-                <CardTitle>{book.title}</CardTitle>
-                <CardDescription>{book.author}</CardDescription>
-                <CardDescription>{book.status}</CardDescription>
-            </CardHeader>
-            <CardContent className="flex justify-between items-center">
-                <Dialog>
-                    <DialogTrigger asChild>
-                        <Button
-                            variant="outline"
-                            className="hover:bg-[#4a90e2] hover:text-white"
-                        >
-                            Edit
-                        </Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                        <DialogHeader>
-                            <DialogTitle>Edit Book Details</DialogTitle>
-                            <DialogDescription>
-                                Make changes to &quot;{book.title}&quot; book
-                                details.
-                            </DialogDescription>
-                        </DialogHeader>
-                        <EditBookForm book={book} />
-                    </DialogContent>
-                </Dialog>
-            </CardContent>
+            <Dialog>
+                <DialogTrigger asChild>
+                    <CardContent
+                        className="h-full cursor-pointer p-0"
+                        onClick={(e) => e.currentTarget.blur()}
+                    >
+                        <CardHeader>
+                            <CardTitle>{book.title}</CardTitle>
+                            <CardDescription>{book.author}</CardDescription>
+                            <CardDescription>{book.status}</CardDescription>
+                        </CardHeader>
+                    </CardContent>
+                </DialogTrigger>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Edit Book Details</DialogTitle>
+                        <DialogDescription>
+                            Make changes to &quot;{book.title}&quot; book
+                            details.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <EditBookForm book={book} />
+                </DialogContent>
+            </Dialog>
         </Card>
     );
 }
